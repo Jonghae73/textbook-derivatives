@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>파생상품론 시뮬레이터</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: 'Noto Serif KR', serif;
+            color: white;
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.9);
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .card-futures .card-icon {
+            background: linear-gradient(135deg, #FF8C00 0%, #FF6B00 100%);
+        }
+
+        .card-options .card-icon {
+            background: linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%);
+        }
+
+        .card-binomial .card-icon {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+        }
+
+        .card h2 {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #1F2937;
+        }
+
+        .card-label {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .card-futures .card-label {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+
+        .card-options .card-label {
+            background: #E3F2FD;
+            color: #1565C0;
+        }
+
+        .card-binomial .card-label {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .card p {
+            color: #6B7280;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .card-features {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .card-features li {
+            color: #4B5563;
+            font-size: 0.875rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .card-features li:last-child {
+            border-bottom: none;
+        }
+
+        .card-features li::before {
+            content: "✓";
+            color: #10B981;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer h3 {
+            font-family: 'Noto Serif KR', serif;
+            margin-bottom: 1rem;
+        }
+
+        .footer p {
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 파생상품론 시뮬레이터</h1>
+        <p class="subtitle">실시간으로 파생상품 가격을 계산하고 이해해보세요</p>
+
+        <div class="cards-grid">
+            <!-- 선물 헤지 계산기 -->
+            <a href="futures-hedge.html" class="card card-futures">
+                <div class="card-icon">📈</div>
+                <span class="card-label">Part 2. 선물</span>
+                <h2>선물 헤지 계산기</h2>
+                <p>선물계약을 이용한 위험 헤지 전략을 시뮬레이션하고 최적의 헤지 비율을 계산합니다.</p>
+                <ul class="card-features">
+                    <li>단순 헤지 (Naive Hedge)</li>
+                    <li>최소분산 헤지 (Minimum Variance Hedge)</li>
+                    <li>KOSPI200 선물 기본값 제공</li>
+                    <li>필요 계약 수 자동 계산</li>
+                </ul>
+            </a>
+
+            <!-- 블랙-숄즈 계산기 -->
+            <a href="black-scholes.html" class="card card-options">
+                <div class="card-icon">🎯</div>
+                <span class="card-label">Part 3. 옵션</span>
+                <h2>블랙-숄즈 옵션 계산기</h2>
+                <p>Black-Scholes 모형으로 유럽형 옵션의 이론가격과 Greeks를 계산합니다.</p>
+                <ul class="card-features">
+                    <li>콜/풋 옵션 가격 계산</li>
+                    <li>Greeks 자동 계산 (Delta, Gamma, Theta, Vega, Rho)</li>
+                    <li>단계별 계산 과정 표시</li>
+                    <li>확대/축소 기능</li>
+                </ul>
+            </a>
+
+            <!-- 이항모형 계산기 -->
+            <a href="binomial-option.html" class="card card-binomial">
+                <div class="card-icon">🌳</div>
+                <span class="card-label">Part 3. 옵션</span>
+                <h2>이항옵션가격결정모형</h2>
+                <p>이항트리로 옵션 가격을 시각적으로 계산하고 미국형 옵션의 조기행사를 분석합니다.</p>
+                <ul class="card-features">
+                    <li>유럽형/미국형 옵션 지원</li>
+                    <li>최대 5단계 트리 시각화</li>
+                    <li>위험중립확률 상세 계산</li>
+                    <li>후진귀납법 과정 표시</li>
+                    <li>조기행사 노드 강조 표시</li>
+                </ul>
+            </a>
+        </div>
+
+        <div class="footer">
+            <h3>📚 파생상품론 교재</h3>
+            <p>
+                이 시뮬레이터는 파생상품론 교재의 학습을 돕기 위해 제작되었습니다.<br>
+                각 계산기는 실제 시장에서 사용되는 모델을 기반으로 하며,<br>
+                학생들이 이론을 실습을 통해 체득할 수 있도록 설계되었습니다.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
