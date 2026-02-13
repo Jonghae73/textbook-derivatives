@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 // 정규분포 누적분포함수 (CDF) 근사
